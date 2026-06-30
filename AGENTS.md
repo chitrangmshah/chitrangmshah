@@ -28,6 +28,7 @@ These apply to every agent and tool operating in this repo.
 - **Append for capture.** Adding a new item is safest as an append; appends rarely collide and merge cleanly. Don't rewrite a file just to add to it.
 - **Let git arbitrate.** Commit in small, frequent units so concurrent changes can be detected and merged rather than lost.
 - Avoid parallel access where possible; a locking/claim convention will be added only if collisions actually occur.
+- **Verify fast-moving terms.** In fast-moving domains (AI, agents, tooling, standards) training may be stale or miss recently-coined terms. For a load-bearing term you cannot recall crisply, state your working definition in one line and invite correction, and do a quick web search before building on it — don't silently assume.
 
 ## Repo conventions
 
@@ -41,9 +42,9 @@ Every folder carries three files:
 
 These cross-reference each other. When you add content, update the folder's `INDEX.md`, and check whether parent `INDEX.md` files need the new folder listed.
 
-### Routing layer (added on maturity)
+### Operational layer — the harness (added on maturity)
 
-A folder may also contain an **`ai-agent-harness/`** subfolder — its **routing / navigation layer**. It holds no answers; it holds thin, self-describing *route* files that point an agent to where content actually lives, and it acts as the folder's interface (its import/export boundary). The routing layer is added only once a folder has *matured* into a promotion candidate — not from birth — so small folders stay lightweight. The repo thus separates **content** (the data/answers, in ordinary folders) from **routing** (the `ai-agent-harness/` interface that points to it).
+A folder may also contain an **`ai-agent-harness/`** subfolder — its **operational layer** (the *harness*). Following the agent-harness model (*Agent = Model + Harness*), it holds everything needed to operate and evolve the folder that isn't the content itself, and it holds no answers. It has two faces: **navigation** (thin, self-describing *route* files pointing to where content lives; route filenames + `INDEX.md` form an emergent router) and **development-steering** (`ROADMAP.md`, `BACKLOG.md`, `DECISIONS.md`); later, **capture** (an inbox) and enrichment configs. It is the folder's interface (import/export boundary). It is added only once a folder has *matured* into a promotion candidate — not from birth — so small folders stay lightweight. The repo thus separates **content** (the data/answers, in ordinary folders) from the **harness** (the operational layer that navigates and evolves them).
 
 ### Naming
 

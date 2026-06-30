@@ -11,5 +11,8 @@ uuid: 019f1888-fcc8-7372-8c91-3052c0593ed5
 + README.md
 + AGENTS.md
 + INDEX.md
++ ROADMAP.md
++ BACKLOG.md
++ DECISIONS.md
 
 ## folders

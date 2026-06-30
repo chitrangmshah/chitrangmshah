@@ -40,14 +40,19 @@ This system reframes a personal presence as something an **agent** reads first a
 
 ### Fractal scaffolding
 
-The same shape repeats at every level. Every folder carries the **trio** — `README.md` (human description), `AGENTS.md` (agent entry point), `INDEX.md` (index of the folder) — so any tool (Claude Code, Obsidian, VS Code) can operate on just that folder in isolation. A folder gains an `ai-agent-harness/` routing layer only once it **matures** into a promotion candidate, so small folders stay lightweight.
+The same shape repeats at every level. Every folder carries the **trio** — `README.md` (human description), `AGENTS.md` (agent entry point), `INDEX.md` (index of the folder) — so any tool (Claude Code, Obsidian, VS Code) can operate on just that folder in isolation. A folder gains an `ai-agent-harness/` operational layer (the *harness*) only once it **matures** into a promotion candidate, so small folders stay lightweight.
 
-### Content vs. routing (the harness)
+### Content vs. harness (the operational layer)
 
-The system separates **content** from **navigation**:
+The system separates **content** from the **harness**. Following the agent-harness model (*Agent = Model + Harness*), the harness is the operational layer — everything needed to operate and evolve a folder that isn't the content itself:
 
 - **Content folders** hold the data / answers.
-- **`ai-agent-harness/`** is the **routing layer**: thin, self-describing *route* files that say *where to look* for a given intent — pointers, not answers. It is also the folder's **interface** (its import/export boundary). Route filenames plus the folder's `INDEX.md` act as an **emergent router**; there is no separate router file.
+- **`ai-agent-harness/`** is the **operational layer** (added on maturity), with two faces:
+  - **navigation** — thin *route* files mapping an intent to *where* content lives (route filenames + `INDEX.md` form an emergent router; no separate router file);
+  - **development-steering** — `ROADMAP.md` (direction), `BACKLOG.md` (open work items), `DECISIONS.md` (decisions made + why).
+  - Later it also holds **capture** (an inbox) and enrichment configs.
+
+  It is the folder's **interface** (its import/export boundary), and it holds no answers.
 
 ### DIKW promotion ladder (a process)
 
@@ -58,7 +63,7 @@ line item in a list  →  a list  →  a section  →  heading promoted up (H3 �
    →  its own file  →  a folder of files  →  (eventually) its own repository
 ```
 
-DIKW (Data → Information → Knowledge → Wisdom) is the **refinement process**, not a fixed folder layout: raw data is captured first and refined over time (the way scratch notes graduate into structured notes). Scheduled enrichment jobs can keep this moving so the graph stays current.
+DIKW (Data → Information → Knowledge → Wisdom) is the **refinement process**, not a fixed folder layout: raw data is captured first and refined over time (the way scratch notes graduate into structured notes). Scheduled enrichment jobs can keep this moving so the graph stays current. The development-steering files mirror this: `BACKLOG` (data → information) → `DECISIONS` (knowledge: what we chose and why) → `ROADMAP` (wisdom: distilled direction).
 
 ### Repo reproduction (offspring)
 
@@ -74,7 +79,7 @@ When a content folder matures into something independent (a research collection,
 | `AGENTS.md` | The **operating manual** — tool-agnostic rules and conventions for any agent. Written generically so it clones unchanged. |
 | `INDEX.md` | The folder's index: `read` / `files` / `folders` lists; the navigable map. |
 | `CLAUDE.md` | Thin Claude Code overlay that imports `AGENTS.md` (`@AGENTS.md`); holds only Claude-specific notes. |
-| `ai-agent-harness/` | The routing / navigation layer (added on maturity). Routes point to content. |
+| `ai-agent-harness/` | The **operational layer** (the harness, added on maturity): navigation (routes) + development-steering (`ROADMAP` / `BACKLOG` / `DECISIONS`) + future capture. Holds no answers. |
 | `CONCEPT.md` | This document — the scope and rationale of the whole system. |
 | `SCRATCHPAD.md` | Raw, unorganized capture, refined into structured notes later. |
 
@@ -102,14 +107,14 @@ The same markdown is *projected* onto multiple surfaces, no rebuild required:
 
 **Status:** early prototype. Scaffolding and conventions are largely in place; content is still thin.
 
-**Open items being designed:** cross-boundary linking strategy; the forwarding-stub convention; the repo-promotion mechanism; the folder maturity threshold; the agent-assisted capture flow; an entry instruction for visiting agents; authentication for private information; a name for the open-source concept; and packaged skills for steering agents.
+The roadmap, open work items, and decisions now live as living documents in `ai-agent-harness/`: see `ROADMAP.md` (direction), `BACKLOG.md` (open items), and `DECISIONS.md` (decisions made).
 
 ## Glossary
 
 - **Digital clone** — a person's information published as an agent-traversable, human-readable markdown graph.
-- **Harness** — the routing/navigation layer (`ai-agent-harness/`); the interface that points to content.
-- **Route** — a thin file naming an intent/topic and pointing to where the content lives.
+- **Harness** — the operational layer (`ai-agent-harness/`); per *Agent = Model + Harness*, everything that operates and evolves a folder except its content: navigation (routes), development-steering (roadmap / backlog / decisions), and capture.
+- **Route** — a thin file naming an intent / topic and pointing to where the content lives.
 - **Trio** — the `README.md` + `AGENTS.md` + `INDEX.md` present in every folder.
-- **Projection surface** — a place the same markdown is rendered/consumed (agent, GitHub, Obsidian, VS Code, SSG).
+- **Projection surface** — a place the same markdown is rendered / consumed (agent, GitHub, Obsidian, VS Code, SSG).
 - **Promotion** — a thought maturing up the ladder (line → list → section → file → folder → repo).
 - **Forwarding stub** — a small pointer left where content used to be, so references still resolve after promotion.
