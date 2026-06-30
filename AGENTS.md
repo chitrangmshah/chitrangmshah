@@ -1,6 +1,9 @@
+---
+uuid: 019f1888-fcc8-7372-8c91-304da8535797
+---
 # AGENTS.md
 
-Guidance for AI agents, LLMs, and models working in this repository. This is the **tool-agnostic source of truth** for how to work here. Tool-specific files (e.g. `CLAUDE.md`) import this file rather than duplicating it.
+Guidance for AI agents, LLMs, and models working in this repository. This is the **tool-agnostic source of truth** for how to work here; tool-specific files (e.g. `CLAUDE.md`) import this file rather than duplicating it. It is written to be **generic and reusable** — it names no specific owner, repo, or content, so it can be cloned into any repo or folder unchanged.
 
 ## read
 + README.md
@@ -8,47 +11,68 @@ Guidance for AI agents, LLMs, and models working in this repository. This is the
 
 ## What this repository is
 
-This is **not a software project** — there is no build, test, lint, or run tooling, and no source code. It is a personal knowledge base / content repo that serves two purposes at once:
+This is **not a software project** — there is no build, test, lint, or run tooling, and no source code. It is a **personal knowledge base** authored as interlinked markdown, meant to be read and traversed by AI agents *and* humans. Depending on how it is published it may also be:
 
-1. **GitHub profile repo.** The repo name matches the owner (`chitrangmshah/chitrangmshah`), so root `README.md` renders on the GitHub profile page at https://github.com/chitrangmshah. Changes to root `README.md` are public-facing.
-2. **Obsidian vault.** The `.obsidian/` directory makes the whole repo an Obsidian vault. "Everything is markdown" is an explicit project principle — content is authored as interlinked markdown notes, not documents in other formats.
+- a **GitHub profile repo** — if the repo is named `<owner>/<owner>`, the root `README.md` renders on that owner's public GitHub profile, so changes to it are public-facing;
+- an **Obsidian vault** — a `.obsidian/` directory, if present, makes the whole repo a vault.
 
-Because there is no code, the work here is editing and organizing markdown. There are no commands to build or test; **verification** means checking that links resolve, frontmatter is valid, and the conventions below hold.
+"Everything is markdown" is an explicit principle. Because there is no code, the work here is editing and organizing markdown; **verification** means checking that links resolve, frontmatter is valid, and the conventions below hold.
 
-## Repo conventions (the important part)
+## Working rules
 
-Each folder follows a three-file pattern. When creating a new folder, add all three:
+These apply to every agent and tool operating in this repo.
+
+- **Read before write.** Markdown files are the source of truth and may be edited in parallel — by another agent, by a projection tool such as Obsidian, or by the owner directly — without this agent's knowledge. Always read a file's current content immediately before writing it.
+- **Prefer targeted edits over full rewrites.** A precise, exact-match edit fails loudly when the surrounding text has changed (catching a concurrent edit) instead of silently overwriting it. Rewrite a whole file only when necessary.
+- **Append for capture.** Adding a new item is safest as an append; appends rarely collide and merge cleanly. Don't rewrite a file just to add to it.
+- **Let git arbitrate.** Commit in small, frequent units so concurrent changes can be detected and merged rather than lost.
+- Avoid parallel access where possible; a locking/claim convention will be added only if collisions actually occur.
+
+## Repo conventions
+
+### Three-file trio (always present)
+
+Every folder carries three files:
 
 - **`README.md`** — human-facing description of the folder's contents.
-- **`AGENTS.md`** — entry point for AI agents/models; lists which files an agent should read (typically points to `README.md` and `INDEX.md`).
-- **`INDEX.md`** — the index of that folder: a `## read` pointer list, a `## files` list, and a `## folders` list. **Every folder should have an `INDEX.md`.** Keep it current when adding or removing files/folders.
+- **`AGENTS.md`** — entry point for AI agents/models; lists which files to read (typically `README.md` and `INDEX.md`).
+- **`INDEX.md`** — the folder's index: a `## read` list, a `## files` list, and a `## folders` list. **Keep it current** when files or folders are added or removed.
 
-These three files cross-reference each other. When you add content to a folder, update its `INDEX.md` so the listing stays accurate, and check whether parent `INDEX.md` files need the new folder added.
+These cross-reference each other. When you add content, update the folder's `INDEX.md`, and check whether parent `INDEX.md` files need the new folder listed.
+
+### Routing layer (added on maturity)
+
+A folder may also contain an **`ai-agent-harness/`** subfolder — its **routing / navigation layer**. It holds no answers; it holds thin, self-describing *route* files that point an agent to where content actually lives, and it acts as the folder's interface (its import/export boundary). The routing layer is added only once a folder has *matured* into a promotion candidate — not from birth — so small folders stay lightweight. The repo thus separates **content** (the data/answers, in ordinary folders) from **routing** (the `ai-agent-harness/` interface that points to it).
 
 ### Naming
 
-- Use **slugs** (kebab-case) for files and folders, e.g. `chitrang-shah`, `ai-agent-harness`.
+- Use **slugs** (kebab-case) for files and folders.
 
-### Rendering note (GitHub + Obsidian)
+### Identifiers
 
-Content renders on **both** GitHub and Obsidian, which differ:
+- Every markdown file carries a stable **`uuid:`** in YAML frontmatter — a **UUIDv7** (RFC 9562; time-ordered, so sortable by creation), generated **once** and never changed. Write it as an unquoted plain scalar; a UUID is always a safe YAML string.
+- Exception: the **root profile `README.md`** carries none, because GitHub renders frontmatter as a visible metadata table and that file is the public profile.
 
-- GitHub callout/alert types are limited to `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, `CAUTION` (case-insensitive). Other types (e.g. `[!Purpose]`, `[!hint]`) render as plain blockquotes on GitHub even though Obsidian supports them.
-- Prefer relative links with explicit extensions (e.g. `[AGENTS.md](AGENTS.md)`) so links resolve on GitHub.
+### Rendering (GitHub + Obsidian)
 
-### Guiding principles (from `chitrang-shah/SCRATCHPAD.md`)
+Content renders on both, which differ:
 
-- **Reuse over reinvent** — "do not reinvent the wheel; always think to reuse first before making something."
+- GitHub callout/alert types are limited to `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, `CAUTION` (case-insensitive). Other types render as plain blockquotes on GitHub even though Obsidian supports them.
+- GitHub auto-generates heading anchors in lowercase, and `[[wikilinks]]` are Obsidian-only (they do not render on GitHub). Prefer relative links with explicit extensions (e.g. `[INDEX.md](INDEX.md)`) for links that must work in both.
+- GitHub renders YAML frontmatter as a metadata table at the top of a file (hence the root profile `README.md` exception above).
+
+## Principles
+
+- **Reuse over reinvent** — do not reinvent the wheel; look to reuse before making something new.
 - **Everything is markdown.**
-- `SCRATCHPAD.md` is for raw, unorganized thoughts that get refined into structured notes later.
 
 ## Structure
 
-- Root — profile `README.md`, plus the `AGENTS.md` / `INDEX.md` index pair and the `CLAUDE.md` overlay.
-- `chitrang-shah/` — personal notes, including `SCRATCHPAD.md`.
-- `ai-agent-harness/` — notes related to AI agent harnesses.
-- `.obsidian/` — Obsidian vault config (plugins, workspace, appearance). Editing tool config here changes the local Obsidian experience, not repo content.
+- **Root** — the profile `README.md`, the `AGENTS.md` / `INDEX.md` trio, and optionally a tool overlay (e.g. `CLAUDE.md`).
+- **Content folders** — the data/answers, each carrying its own trio.
+- **`ai-agent-harness/`** — a routing layer, at root and inside any matured folder.
+- **`.obsidian/`** — Obsidian vault config, if present; editing it changes the local Obsidian experience, not repo content.
 
 ## Licensing
 
-Released into the public domain under the Unlicense (see `LICENSE`).
+See `LICENSE`.

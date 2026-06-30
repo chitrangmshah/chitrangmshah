@@ -1,3 +1,6 @@
+---
+uuid: 019f1888-fcc8-7372-8c91-304f3ecaba8a
+---
 # CLAUDE.md
 
 This file is the **Claude Code-specific overlay**. The repository's conventions are tool-agnostic and live in `AGENTS.md`, which is imported below as the single source of truth.

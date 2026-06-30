@@ -1,3 +1,6 @@
+---
+uuid: 019f1888-fcc8-7372-8c91-305367a2bdfa
+---
 # chitrang-shah
 
 Personal notes and working space for **Chitrang Mukesh Shah** — the person behind this vault.
