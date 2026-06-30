@@ -18,6 +18,18 @@
 ## Follow Me:
 + [WhatsApp Channel](https://whatsapp.com/channel/0029VbD6bqD0AgW95edfji1H)
 
+## Section for AI
+> [!note] 
+>  
+> This section is for: 
+> + AI
+> + agents 
+> + all AI models
+### READ
++ [AGENTS.md](AGENTS.md)
++ [INDEX.md](INDEX.md)
+
+
 <!--
 **chitrangmshah/chitrangmshah** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
