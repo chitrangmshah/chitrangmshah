@@ -15,10 +15,12 @@ folder: ROOT in chitrangmshah
 ## read
 + README.md
 + AGENTS.md
++ CONCEPT.md
 
 ## files
 + README.md
 + AGENTS.md
++ CONCEPT.md
 + CLAUDE.md
 + INDEX.md
 + LICENSE

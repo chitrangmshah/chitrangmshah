@@ -7,6 +7,7 @@ Guidance for AI agents, LLMs, and models working in this repository. This is the
 
 ## read
 + README.md
++ CONCEPT.md
 + INDEX.md
 
 ## What this repository is
