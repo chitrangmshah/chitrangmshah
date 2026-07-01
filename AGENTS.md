@@ -62,6 +62,7 @@ Content renders on both, which differ:
 - GitHub callout/alert types are limited to `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, `CAUTION` (case-insensitive). Other types render as plain blockquotes on GitHub even though Obsidian supports them.
 - GitHub auto-generates heading anchors in lowercase, and `[[wikilinks]]` are Obsidian-only (they do not render on GitHub). Prefer relative links with explicit extensions (e.g. `[INDEX.md](INDEX.md)`) for links that must work in both.
 - GitHub renders YAML frontmatter as a metadata table at the top of a file (hence the root profile `README.md` exception above).
+- GitHub collapses **single newlines** into spaces (consecutive lines become one paragraph); Obsidian shows each line on its own. For line-per-line output on both, use **list items** (`+ key: value`) or a trailing `\` hard break — not bare consecutive lines.
 
 ### Privacy / redaction
 
