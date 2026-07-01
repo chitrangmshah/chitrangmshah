@@ -21,6 +21,7 @@ folder: ROOT in chitrangmshah
 + README.md
 + AGENTS.md
 + CONCEPT.md
++ PRIVACY.md
 + CLAUDE.md
 + INDEX.md
 + LICENSE

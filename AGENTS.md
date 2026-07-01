@@ -63,6 +63,10 @@ Content renders on both, which differ:
 - GitHub auto-generates heading anchors in lowercase, and `[[wikilinks]]` are Obsidian-only (they do not render on GitHub). Prefer relative links with explicit extensions (e.g. `[INDEX.md](INDEX.md)`) for links that must work in both.
 - GitHub renders YAML frontmatter as a metadata table at the top of a file (hence the root profile `README.md` exception above).
 
+### Privacy / redaction
+
+A **redacted value** carries the canonical token **`{private}`**, displayed as `🔒{private}` (lock + token in a code span; the 🔒 and backticks are cosmetic — detection matches the substring `{private}`). It means the data exists but is intentionally withheld (the key stays visible; only the value is redacted). Agents **must not** reveal, guess, infer, or fabricate a redacted value — when asked for one, say it is private and point to `PRIVACY.md` (and, once available, how to request it under authentication). You may confirm the field exists without disclosing the value. This is the public-facing half of the **public-first, private-later** model.
+
 ## Principles
 
 - **Reuse over reinvent** — do not reinvent the wheel; look to reuse before making something new.

@@ -12,5 +12,6 @@ uuid: 019f1888-fcc8-7372-8c91-30559515cc37
 + AGENTS.md
 + INDEX.md
 + SCRATCHPAD.md
++ personal-details.md
 
 ## folders
